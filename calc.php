@@ -61,17 +61,7 @@ echo $b;exit;
 <head>
 <title>KRISCALCULATOR</title>
 <link rel="stylesheet" type="text/css" href="kris.css">
-<style>
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button
-{
--webkit-appearance: none;
-margin: 0;
-}
-input[type=number] {
--moz-appearance: textfield;
-}
-</style>
+
 </head>
 <body>
 <form>
@@ -136,25 +126,52 @@ if (window.XMLHttpRequest) {
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("cal="+cstr);
   }
- function myFunction (evt) {
+function myFunction (evt) {
 var kCode = (evt.which) ? evt.which : evt.keyCode
-if (kCode == 107) {action1("+");
+//limiting key press applicable to numeric keys and arithematic functions
+if (kCode>95&&kCode<106) {
+	} else if (kCode==8) {
+} else if (kCode==110) {
+}
+else if (kCode == 39) {action1("^");
+evt.preventDefault();
+return false;}
+else if (kCode == 220) {action1("√");
+evt.preventDefault();
+return false;}
+else if (kCode == 107) {action1("+");
 evt.preventDefault();
 return false;}
 else if (kCode == 109) {action1("-");
 evt.preventDefault();
 return false;}
-else if (kCode == 106) {action1("*");return false;}
-else if (kCode == 111) {action1("/");return false;}
-else if (kCode == 46) {action1("D");return false;}
+else if (kCode == 187) {action1("=");
+evt.preventDefault();
+return false;}
+else if (kCode == 106) {action1("*");
+evt.preventDefault();
+return false;}
+else if (kCode == 111) {action1("/");
+evt.preventDefault();
+return false;}
+else if (kCode == 46) {action1("D");
+evt.preventDefault();
+return false;}
 else if (kCode == 13) {action1("=");
 evt.preventDefault();
 return false;}
-else if (kCode == 61) {action1("=");return false;}
- }
+else if (kCode == 61) {action1("=");
+evt.preventDefault();
+return false;}
+ else {
+	 
+	 evt.preventDefault();
+	return false;
+}
+}
 </script>
 <?php
-echo "<table class='tablem'><tr><td colspan=4 class='full'><input type='number'  onkeydown='myFunction(event)' id='inpt' value='' class='numbfl' autocomplete='off' autofocus /></td>";
+echo "<table class='tablem'><tr><td colspan=4 class='full'><input type='text'  onkeydown='myFunction(event)' id='inpt' value='' class='numbfl' autocomplete='off' autofocus /></td>";
 echo "<tr><td colspan=4 class='full' id='display1'></td>";
 echo "<tr><td colspan=4 class='full' id='display2'></td>";
 echo "<tr><td class='onefr' onclick=action1('D');>DEL</td><td class='onefr' onclick=action1('√');>√</td><td class='onefr' onclick=action1('^');>^</td><td class='onefr' onclick=action1('=');>=</td>";
